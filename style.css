@@ -1,1 +1,35 @@
-body { background: red; }
+* {
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#pixel-canvas {
+    width: 82px;
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid #d9d9d9;
+}
+
+.pixel {
+    width: 16px;
+    height: 16px;
+    flex: 0 auto;
+}
+.pixel:nth-child(2n) {
+    background-color: #d9d9d9;
+}
+
+.pixel:hover {
+    background-color: crimson;
+}
+
