@@ -14,7 +14,6 @@ body {
 }
 
 #pixel-canvas {
-    width: 82px;
     display: flex;
     flex-wrap: wrap;
     border: 1px solid #d9d9d9;
@@ -25,6 +24,7 @@ body {
     height: 16px;
     flex: 0 auto;
 }
+
 .pixel:nth-child(2n) {
     background-color: #d9d9d9;
 }

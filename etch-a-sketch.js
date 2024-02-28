@@ -1,9 +1,20 @@
+let pixelCanvas;
+
 window.addEventListener('DOMContentLoaded', e => {
-    console.log('loaded');
+    let pixelCanvas = document.querySelector('#pixel-canvas');
+    createGrid(pixelCanvas, 33);
 });
 
+function createPixel() {
+    const pixel = document.createElement('div');
+    pixel.classList.add('pixel');
+    return pixel;
+}
 
-// we need a way to create a pixel via js
-// we need a way to create a grid of a defined size via js
-    // add the right amount of pixels
-    // set the width on pixel-canvas so a square canvas is created
+function createGrid(parent, size) {
+    let numPixels = size*size;
+    for (let i = 0; i < numPixels; i++) {
+        parent.append(createPixel());
+    }
+    parent.style.width = `${size*16 + 2}px`;
+}
