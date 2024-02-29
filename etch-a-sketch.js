@@ -2,9 +2,12 @@ let pixelCanvas;
 let mousedown = false;
 
 window.addEventListener('DOMContentLoaded', e => {
-    let pixelCanvas = document.querySelector('#pixel-canvas');
+    pixelCanvas = document.querySelector('#pixel-canvas');
     pixelCanvas.addEventListener('mousedown', e => { mousedown = true; });
     pixelCanvas.addEventListener('mouseup', e => { mousedown = false; });
+
+    let gridSizeUi = document.querySelector('.ui');
+    gridSizeUi.addEventListener('submit', onNewGridSizeEntered);
 
     createGrid(pixelCanvas, 33);
 });
@@ -18,6 +21,9 @@ function createPixel() {
 }
 
 function createGrid(parent, size) {
+    // remove all previous pixels from the grid
+    parent.innerHTML = '';
+
     let numPixels = size*size;
     for (let i = 0; i < numPixels; i++) {
         parent.append(createPixel());
@@ -30,4 +36,15 @@ function onPixelHovered(e) {
     if (mousedown) {
         e.target.style.background = 'black';
     }
+}
+
+function onNewGridSizeEntered(e) {
+    e.preventDefault();
+
+    const newSize = +document.querySelector('.grid-size-change').value;
+    if (isNaN(newSize)) {
+        console.log("NaN!");
+        return;
+    }
+    createGrid(pixelCanvas, newSize);
 }

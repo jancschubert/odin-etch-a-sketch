@@ -8,6 +8,7 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     
@@ -31,5 +32,18 @@ body {
 
 .pixel:hover {
     background-color: crimson;
+}
+
+.ui {
+    margin: 8px;
+    display: flex;
+    width: calc(100% - 2*8px);
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.ui .grid-size-change {
+    width: 100%;
 }
 
