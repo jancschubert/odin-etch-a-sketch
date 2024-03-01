@@ -84,10 +84,16 @@ body {
 }
 
 .color-pot {
-    background: red;
     border: 2px solid white;
     width: 32px;
     height: 32px;
+}
+
+.eraser {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
 }
 
 .color-pot.selected {

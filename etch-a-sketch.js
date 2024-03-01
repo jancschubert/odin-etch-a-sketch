@@ -84,7 +84,12 @@ function onNewGridSizeEntered(e) {
 }
 
 function onPotClicked(e) {
-    selectedColor = getComputedStyle(e.target).backgroundColor;
+
+    if (e.target.classList.contains('eraser')) {
+        selectedColor = 'transparent';
+    } else {
+        selectedColor = getComputedStyle(e.target).backgroundColor;
+    }
     colorPots.forEach(pot => pot.classList.remove('selected'));
     e.target.classList.add('selected');
 }
