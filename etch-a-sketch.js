@@ -29,7 +29,7 @@ function createPixel() {
     pixel.classList.add('pixel');
     pixel.addEventListener('mouseover', onPixelHovered);
     pixel.addEventListener('dragstart', e => e.preventDefault());
-    pixel.addEventListener('mouseup', e => onPixelClicked);
+    pixel.addEventListener('click', onPixelClicked);
     return pixel;
 }
 
@@ -69,7 +69,6 @@ function onPixelHovered(e) {
 }
 
 function onPixelClicked(e) {
-    console.log('click!');
     e.target.style.background = selectedColor;
 }
 
