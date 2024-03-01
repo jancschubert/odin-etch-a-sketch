@@ -19,23 +19,46 @@ body {
     gap: 8px;
 }
 
+#container {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
 #pixel-canvas {
     display: flex;
     flex-wrap: wrap;
     border: 1px solid #d9d9d9;
+    z-index: 2;
 }
 
-.pixel {
+#grid {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid #d9d9d9;
+    z-index: 1;
+    overflow: hidden;
+}
+
+#grid,
+#pixel-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.pixel,
+.grid-square {
     width: 16px;
     height: 16px;
     flex: 0 auto;
 }
 
-.pixel:nth-child(2n) {
+.grid-square:nth-child(2n) {
     background-color: #d9d9d9;
 }
 
-.pixel:hover {
+.grid-square:hover {
     background-color: crimson;
 }
 

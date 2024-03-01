@@ -1,5 +1,6 @@
 let inputGridSize;
 let pixelCanvas;
+let grid;
 let mousedown = false;
 let colorPots
 let selectedColor = '#f00';
@@ -8,6 +9,8 @@ window.addEventListener('DOMContentLoaded', e => {
     pixelCanvas = document.querySelector('#pixel-canvas');
     pixelCanvas.addEventListener('mousedown', e => { mousedown = true; });
     pixelCanvas.addEventListener('mouseup', e => { mousedown = false; });
+
+    grid = document.querySelector('#grid');
 
     let gridSizeUi = document.querySelector('.ui');
     gridSizeUi.addEventListener('submit', onNewGridSizeEntered);
@@ -30,15 +33,32 @@ function createPixel() {
     return pixel;
 }
 
+function createGridSquare() {
+    const pixel = document.createElement('div');
+    pixel.classList.add('grid-square');
+    return pixel;
+}
+
 function createGrid(parent, size) {
-    // remove all previous pixels from the grid
     parent.innerHTML = '';
+    grid.innerHTML = '';
 
     let numPixels = size*size;
     for (let i = 0; i < numPixels; i++) {
         parent.append(createPixel());
     }
     parent.style.width = `${size*16 + 2}px`;
+
+    let gridSize = size;
+    if (size % 2 === 0) {
+        // to get the checkers pattern, the gridsize has to be uneven.
+        gridSize += 1; 
+    }
+    let numGridSquares = gridSize * gridSize;
+    for (let j = 0; j < numGridSquares; j++) {
+        grid.append(createGridSquare());
+    }
+    grid.style.width = `${gridSize*16+ 2}px`
 }
 
 function onPixelHovered(e) {
