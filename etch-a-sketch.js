@@ -1,9 +1,11 @@
 let inputGridSize;
 let pixelCanvas;
+let container;
 let grid;
 let mousedown = false;
 let colorPots
 let selectedColor = '#f00';
+let size = 32;
 
 window.addEventListener('DOMContentLoaded', e => {
     pixelCanvas = document.querySelector('#pixel-canvas');
@@ -11,9 +13,14 @@ window.addEventListener('DOMContentLoaded', e => {
     pixelCanvas.addEventListener('mouseup', e => { mousedown = false; });
 
     grid = document.querySelector('#grid');
+    container = document.querySelector('#container');
 
     let gridSizeUi = document.querySelector('.ui');
     gridSizeUi.addEventListener('submit', onNewGridSizeEntered);
+
+    let gridSizeInput = document.querySelector('.grid-size-change');
+    gridSizeInput.addEventListener('input', onSizeInputChanged);
+    gridSizeInput.placeholder= `${size} (size)`;
 
     colorPots = document.querySelectorAll('.color-pot');
     colorPots.forEach(pot => pot.addEventListener('click', onPotClicked));
@@ -21,7 +28,7 @@ window.addEventListener('DOMContentLoaded', e => {
 
     inputGridSize = document.querySelector('.grid-size-change');
 
-    createGrid(pixelCanvas, 33);
+    createGrid(pixelCanvas, size);
 });
 
 function createPixel() {
@@ -48,6 +55,8 @@ function createGrid(parent, size) {
         parent.append(createPixel());
     }
     parent.style.width = `${size*16 + 2}px`;
+    container.style.width = `${size*16+ 2}px`;
+    container.style.height = `${size*16+ 2}px`;
 
     let gridSize = size;
     if (size % 2 === 0) {
@@ -58,7 +67,7 @@ function createGrid(parent, size) {
     for (let j = 0; j < numGridSquares; j++) {
         grid.append(createGridSquare());
     }
-    grid.style.width = `${gridSize*16+ 2}px`
+    grid.style.width = `${gridSize*16+ 2}px`;
 }
 
 function onPixelHovered(e) {
@@ -80,7 +89,8 @@ function onNewGridSizeEntered(e) {
         console.log("NaN!");
         return;
     }
-    createGrid(pixelCanvas, newSize);
+    size = newSize;
+    createGrid(pixelCanvas, size);
 }
 
 function onPotClicked(e) {
@@ -92,4 +102,11 @@ function onPotClicked(e) {
     }
     colorPots.forEach(pot => pot.classList.remove('selected'));
     e.target.classList.add('selected');
+}
+
+function onSizeInputChanged(e) {
+    console.log('change!');
+    if (e.target.value === '') {
+        e.target.placeholder = `${size} (size)`;
+    }
 }
