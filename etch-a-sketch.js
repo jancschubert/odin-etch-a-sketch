@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', e => {
     grid = document.querySelector('#grid');
     container = document.querySelector('#container');
 
-    let gridSizeUi = document.querySelector('.ui');
+    const gridSizeUi = document.querySelector('.ui');
     gridSizeUi.addEventListener('submit', onNewGridSizeEntered);
 
     let gridSizeInput = document.querySelector('.grid-size-change');
@@ -27,6 +27,7 @@ window.addEventListener('DOMContentLoaded', e => {
     colorPots[0].classList.add('selected');
 
     inputGridSize = document.querySelector('.grid-size-change');
+    inputGridSize.value = size;
 
     createGrid(pixelCanvas, size);
 });
@@ -36,7 +37,7 @@ function createPixel() {
     pixel.classList.add('pixel');
     pixel.addEventListener('mouseover', onPixelHovered);
     pixel.addEventListener('dragstart', e => e.preventDefault());
-    pixel.addEventListener('click', onPixelClicked);
+    pixel.addEventListener('onmouseDown', onPixelClicked);
     return pixel;
 }
 
@@ -71,6 +72,7 @@ function createGrid(parent, size) {
 }
 
 function onPixelHovered(e) {
+    console.log('onPixelHovered');
     e.preventDefault();
     if (mousedown) {
         e.target.style.background = selectedColor;
@@ -78,6 +80,7 @@ function onPixelHovered(e) {
 }
 
 function onPixelClicked(e) {
+    console.log('onPixelClicked');
     e.target.style.background = selectedColor;
 }
 
@@ -89,7 +92,8 @@ function onNewGridSizeEntered(e) {
         console.log("NaN!");
         return;
     }
-    size = newSize;
+    size = Math.min(newSize, 64);
+    inputGridSize.value = size;
     createGrid(pixelCanvas, size);
 }
 

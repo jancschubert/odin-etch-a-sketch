@@ -76,7 +76,8 @@ body {
 }
 
 .ui .grid-size-change {
-    width: 64px;
+    width: 32px;
+    text-align: center;
 }
 
 #palette {
@@ -98,6 +99,7 @@ body {
     justify-content: center;
     align-items: center;
     cursor: default;
+    background: #ddd;
 }
 
 .color-pot.selected {
